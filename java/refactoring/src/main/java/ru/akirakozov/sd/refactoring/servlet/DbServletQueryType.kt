@@ -15,7 +15,7 @@ enum class DbServletQueryType {
 
         override fun evaluate(statement: Statement, request: HttpServletRequest, printer: PrettyPrinter) =
             update(statement, request) {
-                printer.printText("ok")
+                printer.printText("OK")
             }
     },
     MIN {
