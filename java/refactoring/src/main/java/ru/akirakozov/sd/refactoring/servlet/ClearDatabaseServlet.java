@@ -9,6 +9,12 @@ import java.sql.Statement;
 
 public class ClearDatabaseServlet extends HttpServlet {
 
+    private final DbController dbController;
+
+    public ClearDatabaseServlet(DbController dbController) {
+        this.dbController = dbController;
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         try {

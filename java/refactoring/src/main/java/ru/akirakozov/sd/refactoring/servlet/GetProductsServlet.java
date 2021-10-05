@@ -14,6 +14,12 @@ import java.sql.Statement;
  */
 public class GetProductsServlet extends HttpServlet {
 
+    private final DbController dbController;
+
+    public GetProductsServlet(DbController dbController) {
+        this.dbController = dbController;
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
@@ -23,8 +29,8 @@ public class GetProductsServlet extends HttpServlet {
                 response.getWriter().println("<html><body>");
 
                 while (rs.next()) {
-                    String  name = rs.getString("name");
-                    int price  = rs.getInt("price");
+                    String name = rs.getString("name");
+                    int price = rs.getInt("price");
                     response.getWriter().println(name + "\t" + price + "</br>");
                 }
                 response.getWriter().println("</body></html>");
