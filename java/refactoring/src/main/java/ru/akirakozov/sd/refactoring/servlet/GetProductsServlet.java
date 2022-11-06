@@ -2,7 +2,11 @@ package ru.akirakozov.sd.refactoring.servlet;
 
 import ru.akirakozov.sd.refactoring.dao.Product;
 import ru.akirakozov.sd.refactoring.dao.ProductTable;
-import ru.akirakozov.sd.refactoring.html.*;
+import ru.akirakozov.sd.refactoring.html.Body;
+import ru.akirakozov.sd.refactoring.html.Br;
+import ru.akirakozov.sd.refactoring.html.Html;
+import ru.akirakozov.sd.refactoring.html.HtmlElement;
+import ru.akirakozov.sd.refactoring.html.Text;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Stream;
+
+import static ru.akirakozov.sd.refactoring.utils.ResponseUtils.setHtmlResponse;
 
 /**
  * @author akirakozov
@@ -31,8 +37,6 @@ public class GetProductsServlet extends HttpServlet {
                 .toList();
         Html html = new Html(new Body(elements));
 
-        response.getWriter().println(html);
-        response.setContentType("text/html");
-        response.setStatus(HttpServletResponse.SC_OK);
+        setHtmlResponse(response, html);
     }
 }

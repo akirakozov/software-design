@@ -2,11 +2,14 @@ package ru.akirakozov.sd.refactoring.servlet;
 
 import ru.akirakozov.sd.refactoring.dao.Product;
 import ru.akirakozov.sd.refactoring.dao.ProductTable;
+import ru.akirakozov.sd.refactoring.html.Text;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+import static ru.akirakozov.sd.refactoring.utils.ResponseUtils.setHtmlResponse;
 
 /**
  * @author akirakozov
@@ -25,8 +28,8 @@ public class AddProductServlet extends HttpServlet {
 
         productTable.add(new Product(name, price));
 
-        response.setContentType("text/html");
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().println("OK");
+        Text text = new Text("OK");
+
+        setHtmlResponse(response, text);
     }
 }
