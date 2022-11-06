@@ -16,10 +16,12 @@ public class DatabaseUtils {
     }
 
     public static List<Product> getAllProducts() {
-        try (Connection c = DriverManager.getConnection("jdbc:sqlite:test.db");
-             Statement stmt = c.createStatement()) {
-            String sql = "SELECT * FROM PRODUCT";
-            ResultSet rs = stmt.executeQuery(sql);
+        String sql = "SELECT * FROM PRODUCT";
+        try (
+                Connection c = DriverManager.getConnection("jdbc:sqlite:test.db");
+                Statement stmt = c.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);
+        ) {
             List<Product> products = new ArrayList<>();
 
             while (rs.next()) {
@@ -36,8 +38,10 @@ public class DatabaseUtils {
     }
 
     public static void addProducts(List<Product> products) {
-        try (Connection c = DriverManager.getConnection("jdbc:sqlite:test.db");
-             Statement stmt = c.createStatement()) {
+        try (
+                Connection c = DriverManager.getConnection("jdbc:sqlite:test.db");
+                Statement stmt = c.createStatement();
+        ) {
             String sqlProducts = products.stream()
                     .map(product -> "(\"%s\", %d)".formatted(product.name(), product.price()))
                     .collect(Collectors.joining(", "));
@@ -50,8 +54,10 @@ public class DatabaseUtils {
     }
 
     public static void initTable() {
-        try (Connection c = DriverManager.getConnection("jdbc:sqlite:test.db");
-             Statement stmt = c.createStatement()) {
+        try (
+                Connection c = DriverManager.getConnection("jdbc:sqlite:test.db");
+                Statement stmt = c.createStatement();
+        ) {
             String sql = "DROP TABLE IF EXISTS PRODUCT";
             stmt.executeUpdate(sql);
 
@@ -65,8 +71,10 @@ public class DatabaseUtils {
     }
 
     public static void truncateTable() {
-        try (Connection c = DriverManager.getConnection("jdbc:sqlite:test.db");
-             Statement stmt = c.createStatement()) {
+        try (
+                Connection c = DriverManager.getConnection("jdbc:sqlite:test.db");
+                Statement stmt = c.createStatement();
+        ) {
             String sql = "DELETE FROM PRODUCT where 1 = 1";
             stmt.executeUpdate(sql);
         } catch (SQLException ignored) {
