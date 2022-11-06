@@ -4,7 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import ru.akirakozov.sd.refactoring.dto.Product;
+import ru.akirakozov.sd.refactoring.dao.Product;
 import ru.akirakozov.sd.refactoring.utils.DatabaseUtils;
 
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +19,7 @@ public class QueryServletTest extends AbstractServletTest {
 
     @BeforeEach
     void setUp() {
-        servlet = new QueryServlet();
+        servlet = new QueryServlet(productTable);
         DatabaseUtils.addProducts(PRODUCTS);
     }
 

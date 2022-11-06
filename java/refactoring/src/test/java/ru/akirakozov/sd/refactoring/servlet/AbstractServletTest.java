@@ -3,7 +3,9 @@ package ru.akirakozov.sd.refactoring.servlet;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
-import ru.akirakozov.sd.refactoring.dto.Product;
+import ru.akirakozov.sd.refactoring.dao.Product;
+import ru.akirakozov.sd.refactoring.dao.ProductTable;
+import ru.akirakozov.sd.refactoring.db.Database;
 import ru.akirakozov.sd.refactoring.utils.DatabaseUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +26,7 @@ public abstract class AbstractServletTest {
     protected HttpServletRequest mockRequest;
     protected HttpServletResponse mockResponse;
     protected StringWriter response;
+    protected ProductTable productTable;
 
     @BeforeEach
     void init() throws IOException {
@@ -34,6 +37,9 @@ public abstract class AbstractServletTest {
         response = new StringWriter();
         PrintWriter printWriter = new PrintWriter(response);
         Mockito.when(mockResponse.getWriter()).thenReturn(printWriter);
+
+        Database database = new Database(DatabaseUtils.CONNECTION_URL);
+        productTable = new ProductTable(database);
     }
 
     @AfterEach

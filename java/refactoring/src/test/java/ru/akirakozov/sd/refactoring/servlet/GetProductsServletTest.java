@@ -17,7 +17,7 @@ public class GetProductsServletTest extends AbstractServletTest {
 
     @BeforeEach
     void setUp() {
-        servlet = new GetProductsServlet();
+        servlet = new GetProductsServlet(productTable);
     }
 
     @AfterEach

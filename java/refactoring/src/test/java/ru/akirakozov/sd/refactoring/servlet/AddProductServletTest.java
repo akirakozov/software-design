@@ -4,7 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import ru.akirakozov.sd.refactoring.dto.Product;
+import ru.akirakozov.sd.refactoring.dao.Product;
 import ru.akirakozov.sd.refactoring.utils.DatabaseUtils;
 
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +20,7 @@ class AddProductServletTest extends AbstractServletTest {
 
     @BeforeEach
     void setUp() {
-        servlet = new AddProductServlet();
+        servlet = new AddProductServlet(productTable);
         mockRequest();
     }
 
