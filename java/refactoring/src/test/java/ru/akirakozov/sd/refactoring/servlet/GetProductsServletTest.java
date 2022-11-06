@@ -31,8 +31,8 @@ public class GetProductsServletTest extends AbstractServletTest {
 
         servlet.doGet(mockRequest, mockResponse);
         String expectedHtmlResponse = PRODUCTS.stream()
-                .map(product -> product.name() + "\t" + product.price() + "</br>")
-                .collect(Collectors.joining("\n", "<html><body>\n", "\n</body></html>\n"));
+                .map(product -> product.name() + "\t" + product.price() + "\n<br>")
+                .collect(Collectors.joining("\n", "<html>\n<body>\n", "\n</body>\n</html>\n"));
 
         assertEquals(expectedHtmlResponse, getResponse());
     }

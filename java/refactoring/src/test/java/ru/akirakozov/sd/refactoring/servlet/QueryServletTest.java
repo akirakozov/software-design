@@ -36,10 +36,15 @@ public class QueryServletTest extends AbstractServletTest {
 
         Product maxProduct = Collections.max(PRODUCTS, Comparator.comparingLong(Product::price));
         String expectedResponse = """
-                <html><body>
-                <h1>Product with max price: </h1>
-                %s\t%d</br>
-                </body></html>
+                <html>
+                <body>
+                <h1>
+                Product with max price:\s
+                </h1>
+                %s	%d
+                <br>
+                </body>
+                </html>
                 """.formatted(maxProduct.name(), maxProduct.price());
 
         assertEquals(expectedResponse, getResponse());
@@ -53,10 +58,15 @@ public class QueryServletTest extends AbstractServletTest {
 
         Product maxProduct = Collections.min(PRODUCTS, Comparator.comparingLong(Product::price));
         String expectedResponse = """
-                <html><body>
-                <h1>Product with min price: </h1>
-                %s\t%d</br>
-                </body></html>
+                <html>
+                <body>
+                <h1>
+                Product with min price:\s
+                </h1>
+                %s	%d
+                <br>
+                </body>
+                </html>
                 """.formatted(maxProduct.name(), maxProduct.price());
 
         assertEquals(expectedResponse, getResponse());
@@ -70,10 +80,12 @@ public class QueryServletTest extends AbstractServletTest {
 
         long sumPrices = PRODUCTS.stream().mapToLong(Product::price).sum();
         String expectedResponse = """
-                <html><body>
+                <html>
+                <body>
                 Summary price:\s
                 %d
-                </body></html>
+                </body>
+                </html>
                 """.formatted(sumPrices);
 
         assertEquals(expectedResponse, getResponse());
@@ -87,10 +99,12 @@ public class QueryServletTest extends AbstractServletTest {
 
         long count = PRODUCTS.size();
         String expectedResponse = """
-                <html><body>
+                <html>
+                <body>
                 Number of products:\s
                 %d
-                </body></html>
+                </body>
+                </html>
                 """.formatted(count);
 
         assertEquals(expectedResponse, getResponse());

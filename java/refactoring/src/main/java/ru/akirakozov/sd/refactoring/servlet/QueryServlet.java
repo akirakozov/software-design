@@ -2,6 +2,7 @@ package ru.akirakozov.sd.refactoring.servlet;
 
 import ru.akirakozov.sd.refactoring.dao.Product;
 import ru.akirakozov.sd.refactoring.dao.ProductTable;
+import ru.akirakozov.sd.refactoring.html.*;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,33 +28,55 @@ public class QueryServlet extends HttpServlet {
             String name = maxProduct.name();
             long price = maxProduct.price();
 
-            response.getWriter().println("<html><body>");
-            response.getWriter().println("<h1>Product with max price: </h1>");
-            response.getWriter().println(name + "\t" + price + "</br>");
-            response.getWriter().println("</body></html>");
+            Html html = new Html(
+                    new Body(
+                            new H1(
+                                    new Text("Product with max price: ")
+                            ),
+                            new Text(name + "\t" + price),
+                            new Br()
+                    )
+            );
+
+            response.getWriter().println(html);
         } else if ("min".equals(command)) {
             Product minProduct = productTable.minByPrice();
             String name = minProduct.name();
             long price = minProduct.price();
 
-            response.getWriter().println("<html><body>");
-            response.getWriter().println("<h1>Product with min price: </h1>");
-            response.getWriter().println(name + "\t" + price + "</br>");
-            response.getWriter().println("</body></html>");
+            Html html = new Html(
+                    new Body(
+                            new H1(
+                                    new Text("Product with min price: ")
+                            ),
+                            new Text(name + "\t" + price),
+                            new Br()
+                    )
+            );
+
+            response.getWriter().println(html);
         } else if ("sum".equals(command)) {
             long sum = productTable.sumPrices();
 
-            response.getWriter().println("<html><body>");
-            response.getWriter().println("Summary price: ");
-            response.getWriter().println(sum);
-            response.getWriter().println("</body></html>");
+            Html html = new Html(
+                    new Body(
+                            new Text("Summary price: "),
+                            new Text(Long.toString(sum))
+                    )
+            );
+
+            response.getWriter().println(html);
         } else if ("count".equals(command)) {
             long count = productTable.count();
 
-            response.getWriter().println("<html><body>");
-            response.getWriter().println("Number of products: ");
-            response.getWriter().println(count);
-            response.getWriter().println("</body></html>");
+            Html html = new Html(
+                    new Body(
+                            new Text("Number of products: "),
+                            new Text(Long.toString(count))
+                    )
+            );
+
+            response.getWriter().println(html);
         } else {
             response.getWriter().println("Unknown command: " + command);
         }
