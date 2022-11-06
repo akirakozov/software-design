@@ -109,4 +109,15 @@ public class QueryServletTest extends AbstractServletTest {
 
         assertEquals(expectedResponse, getResponse());
     }
+
+    @Test
+    void testUnknownCommand() throws IOException {
+        Mockito.when(mockRequest.getParameter("command")).thenReturn("unknown");
+
+        servlet.doGet(mockRequest, mockResponse);
+
+        String expectedResponse = "Unknown command: unknown\n";
+
+        assertEquals(expectedResponse, getResponse());
+    }
 }
